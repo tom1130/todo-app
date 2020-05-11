@@ -11,9 +11,9 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "image": "./assets/splash1.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#F23657"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -23,6 +23,13 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android":{
+      "package":"giho.todo"
+    },
+    "sdkVersion": "37.0.0",
+    "packagerOpts": {
+      "nonPersistent": false
     }
   }
 }

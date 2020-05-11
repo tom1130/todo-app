@@ -29,7 +29,8 @@ export default class ToDo extends React.Component{
                 </TouchableOpacity>
                 {isEditing ? (
                 <TextInput style={[styles.input,styles.text,isCompleted ? styles.completedText : styles.uncompletedText]} 
-                    value={toDovalue} multiline={true} onChangeText={this._controllInput} onBlur={this._endEditing}/>) : (
+                    value={toDovalue} multiline={true} onChangeText={this._controllInput} onBlur={this._endEditing}/>) 
+                    : (
                 <Text style={[styles.text,isCompleted ? styles.completedText : styles.uncompletedText]}>
                     {text}
                 </Text>
@@ -50,7 +51,9 @@ export default class ToDo extends React.Component{
                             <Text style={styles.actionText}>🖌</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity onPressOut={() => deleteToDo(id)}>
+                    <TouchableOpacity onPressOut={event => {
+                        event.stopPropagation
+                        deleteToDo(id) }}>
                         <View style={styles.actionContainer}>
                             <Text style={styles.actionText}>❌</Text>
                         </View>
@@ -59,7 +62,8 @@ export default class ToDo extends React.Component{
             )}    
         </View>
     )}
-    _toggleComplete = () =>{
+    _toggleComplete = (event) =>{
+        event.stopPropagation();
         const {isCompleted, uncompletedToDo, completedToDo, id} = this.props;
         if(isCompleted){
             uncompletedToDo(id);
@@ -67,12 +71,14 @@ export default class ToDo extends React.Component{
             completedToDo(id);
         }
     }
-    _startEditing = () =>{
+    _startEditing = (event) =>{
+        event.stopPropagation();
         this.setState({
             isEditing: true,
         })
     }
-    _endEditing = () =>{
+    _endEditing = (event) =>{
+        event.stopPropagation();
         const {toDovalue} = this.state;
         const {id,  updateToDo} = this.props;
         updateToDo(id,toDovalue);
